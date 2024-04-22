@@ -1,0 +1,116 @@
+//1st file
+package Dependency_inversion_principal;
+
+/**
+ * Interface representing a database for booking halls.
+ */
+public interface Database {
+
+   /*
+    * chacking information
+    */
+    boolean bookHall(String hallId, String userId, String startingDate, String endingDate, int duration);
+}
+
+//2nd file
+package Dependency_inversion_principal;
+
+/**
+ * Interface representing a booking system for booking halls.
+ */
+public interface Booking_System {
+
+    //chaking if book or not 
+    boolean bookHall(String hallId, String username, String startingDate, String endingDate, int duration);
+}
+
+//3rd file
+package Dependency_inversion_principal;
+
+/**
+ * Implementation of the Database interface for booking halls.
+ */
+public class Create_Database implements Database {
+
+    /**
+     * Books a hall for a user.
+     * 
+     * @param hallRoom      The room to book.
+     * @param userId        The ID of the user booking the hall.
+     * @param startingDate  The starting date of the booking.
+     * @param endingDate    The ending date of the booking.
+     * @param duration      The duration of the booking in years.
+     */
+    public boolean bookHall(String hallRoom, String userId, String startingDate, String endingDate, int duration) {
+        // Database operation to book the hall for a user
+        System.out.println("Booking hall ROOM: " + hallRoom + " for user: (" + userId + ") from " + startingDate + " to " + endingDate + " for " + duration + " years.");
+        return true; // For simplicity, assuming booking is always successful
+    }
+
+}
+// 4th file
+package Dependency_inversion_principal;
+
+/**
+ * Implementation of the Booking_System interface for booking halls.
+ */
+public class Create_BookingSystem implements Booking_System {
+
+    private Database database;
+
+    /**
+     * Constructs a booking system with a specified database.
+     * 
+     * @param database The database to use for bookings.
+     */
+    public Create_BookingSystem(Database database) {
+        this.database = database;
+    }
+
+    /**
+     * Books a hall for a user.
+     * 
+     * @param hallRoom     The room to book.
+     * @param username     The username of the user booking the hall.
+     * @param startingDate The starting date of the booking.
+     * @param endingDate   The ending date of the booking.
+     * @param duration     The duration of the booking in years.
+
+     */
+    public boolean bookHall(String hallRoom, String username, String startingDate, String endingDate, int duration) {
+        boolean isSuccess = database.bookHall(hallRoom, username, startingDate, endingDate, duration);
+        if (isSuccess) {
+            // Send confirmation email
+            System.out.println("Booking successful. Confirmation email sent to " + username);
+            // Update user records
+            System.out.println("User records updated for " + username);
+        }
+        return isSuccess;
+    }
+}
+//5th file(main file)
+package Dependency_inversion_principal;
+
+/**
+ * Main class to demonstrate hall booking functionality.
+ */
+public class Hall_Management {
+
+    public static void main(String[] args) {
+        // Create a database instance
+        Database data = new Create_Database();
+        
+        // Create a booking system instance using the database
+        Booking_System bookingSystem = new Create_BookingSystem(data);
+
+        // Attempt to book a hall
+        boolean isBookingSuccessful = bookingSystem.bookHall("422", "Sayem", "01/03/2024", "01/03/2024", 2);
+
+        // Check if the booking was successful
+        if (isBookingSuccessful) {
+            System.out.println("Hall booked successfully!");
+        } else {
+            System.out.println("Failed to book the hall. Please try again later.");
+        }
+    }
+}
