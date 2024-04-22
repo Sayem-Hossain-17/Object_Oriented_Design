@@ -1,0 +1,110 @@
+//1st class
+package Open_Closed_Principal;
+
+/**
+ * Interface representing an entity that can calculate BMI.
+ */
+public interface Entity {
+
+    /**
+     * Calculates the BMI (Body Mass Index) of the entity.
+     *
+     * @return the calculated BMI
+     */
+    public double calculateBMI();
+    ;//abstract  mwthod  which is useing to calculateBMI
+
+
+
+}
+//2nd file class
+package Open_Closed_Principal;
+
+/**
+ * Class representing a person entity.
+ */
+public class Person implements Entity {
+
+    private double height;  // Height of person in meters
+    private double weight;  // Weight of person in kilograms
+
+    // Constructor
+    public Person(double height, double weight) {
+        this.height = height;
+        this.weight = weight;
+    }
+
+    // Method to calculate BMI
+    //@Override
+    public double calculateBMI() {
+        // Calculate BMI using height and weight
+        return weight / (height * height);
+    }
+}
+//3rd file class
+package Open_Closed_Principal;
+
+/**
+ * Class representing an athlete entity.
+ */
+public class Athlete implements Entity {
+    private double height; // Height of the athlete in meters
+    private double weight; // Weight of the athlete in kilograms
+    private double bodyFatPercentage; // Body fat percentage of the athlete
+
+    // Constructor
+    public Athlete(double height, double weight, double bodyFatPercentage) {
+        this.height = height;
+        this.weight = weight;
+        this.bodyFatPercentage = bodyFatPercentage;
+    }
+
+    //@Override
+    public double calculateBMI() {
+        // Adjusted BMI calculation for athletes based on body fat percentage
+        double leanBodyMass = weight * (1 - bodyFatPercentage);
+        return leanBodyMass / (height * height);
+    }
+}
+//4th file class
+package Open_Closed_Principal;
+
+/**
+ * Class representing an animal entity.
+ */
+public class Animal implements Entity {
+    private double weight; // Weight of the animal in kilograms
+    private double size; // Size of the animal in meters
+
+    // Constructor
+    public Animal(double weight, double size) {
+        this.weight = weight;
+        this.size = size;
+    }
+
+    //@Override
+    public double calculateBMI() {
+        // Calculate BMI for the animal
+        double bmi = weight / (size * size);
+        return bmi;
+    }
+}
+// 5th main class
+package Open_Closed_Principal;
+
+public class Main {
+
+    public static void main(String[] args) {
+        
+        // Creating instances of different entities
+        Entity Sayem = new Person(1.7526, 67);
+        Entity Rohan = new Athlete(1.5, 55, 0.1);
+        Entity Dog = new Animal(50, 0.5);
+
+        // Calculating and printing BMI for each entity
+        System.out.println("Sayem BMI: " + Sayem.calculateBMI());
+        System.out.println("Rohan BMI: " + Rohan.calculateBMI());
+        System.out.println("Dog BMI: " + Dog.calculateBMI());
+    }
+}
+
