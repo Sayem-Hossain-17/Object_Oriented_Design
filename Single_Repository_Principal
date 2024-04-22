@@ -1,0 +1,225 @@
+package Singal_Repository_Principal;
+/**
+ * Student
+ */
+public class Student {
+    
+        // Instance variables
+        public String name; // Student's name
+        public int id; // Student's ID
+        public int age; // Student's age
+        public double[] marks; // Array to store student's marks
+        public String email; // Student's email address
+    
+
+
+        // Constructor with name, id, age, and email parameters
+        public Student(String name, int id, int age, String email,double[] marks) {
+            this.name = name;
+            this.id = id;
+            this.age = age;
+            this.email = email;
+            this.marks=marks;
+        }
+        
+
+        
+    
+        // Constructor with marks parameter
+        // public Student(double[] marks) {
+        //     this.marks = marks;
+        // }
+    
+        // Getter for age
+        public int getAge() {
+            return age;
+        }
+    
+        // Getter for email
+        public String getEmail() {
+            return email;
+        }
+    
+        // Getter for name
+        public String getName() {
+            return name;
+        }
+    
+        // Getter for ID
+        public int getId() {
+            return id;
+        }
+    
+        // Setter for name
+        public void setName(String name) {
+            this.name = name;
+        }
+    
+        // Setter for ID
+        public void setId(int id) {
+            this.id = id;
+        }
+    
+        // Getter for marks
+        public double[] getMarks() {
+            return marks;
+        }
+    
+        // Setter for marks
+        public void setMarks(double[] marks) {
+            this.marks = marks;
+        }
+    
+        // Setter for age
+        public void setAge(int age) {
+            this.age = age;
+        }
+    
+        // Setter for email
+        public void setEmail(String email) {
+            this.email = email;
+        }
+    
+        
+    }
+    
+//2nd file class
+package Singal_Repository_Principal;
+
+/**
+ * Represents the registration of a student.
+ */
+public class StudentRegistration {
+
+    /**
+     * Registers a student.
+     * @param student The student object to be registered
+     */
+    public void registerStudent(Student student) {
+        // Add to register the student
+        if (student != null) {
+            // Perform registration tasks such as adding the student to a database
+            System.out.println("Student registration details: \n" + student.getName() + "\n" + student.getId() + "\n" + student.getEmail());
+        } else {
+            System.out.println("Invalid student data. Registration failed.");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "registered complete";
+    }
+
+}
+
+//3rd file class
+package Singal_Repository_Principal;
+
+/**
+ * Represents the result of a student based on their marks.
+ */
+public class StudentResult {
+    
+    private String result; // Holds the result (Pass/Fail)
+
+    /**
+     * Calculates the result of a student based on their marks.
+     * @param s The student object containing marks
+     */
+
+
+    public void calculateStudent_Result(Student s) {
+
+        if (s == null || s.getMarks() == null) {
+            System.out.println("Invalid student data.");
+            return;
+        }
+
+
+        double[] studentMarks = s.getMarks();// Assuming getMarks() returns an array of marks for the student
+
+        double totalMarks = 0;
+        for (double mark : studentMarks) {
+            totalMarks += mark;
+        }// Perform further calculations or processing with totalMarks
+
+
+
+        double averageMark = totalMarks / studentMarks.length;
+        int averageMarkRounded = (int) Math.round(averageMark);//The averagemark is then rounded to the nearest integer using Math.round() and cast to an integer.
+
+
+        if (averageMarkRounded >=40) {
+            result = "Pass";
+        } else {
+            result = "Fail";
+        }
+    }
+
+    // @Override toString method;
+    public String toString() {
+        return result;
+    }
+
+}
+
+// 4th ,the main class 
+package Singal_Repository_Principal;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+
+
+        Scanner scanner=new Scanner(System.in); // Create a Scanner object for user input
+
+        // Get student information from user input
+        System.out.println("Enter student name:");
+        String name=scanner.nextLine();
+
+        System.out.println("Enter student ID:");
+        int id=scanner.nextInt();
+
+        System.out.println("Enter student age:");
+        int age=scanner.nextInt();
+       
+        System.out.println("Enter Student email:");
+        String email=scanner.next();
+
+
+
+         // Get student marks for subjects
+        System.out.println("Enter the number of subjects:");
+        int numberOfMarks=scanner.nextInt();//size of marks array 
+        System.out.println("Enter the subject marks:");
+        double []mark=new double[numberOfMarks];// Array to store marks
+
+        //keep student marks
+        for (int i=0;i<numberOfMarks;i++ ) {
+            System.out.println("Enter mark-"+(i+1)+":");
+            mark[i]=scanner.nextDouble();
+            
+        }// Process the student and marks data as needed
+        scanner.close();
+
+
+        // Create a Student object with the input data
+        Student student =new Student(name,id,age,email,mark);//student identity 
+        
+        // Create objects for StudentResult and StudentRegistration
+        StudentResult result = new StudentResult();//a  student result object 
+        StudentRegistration reg=new StudentRegistration();//a student resitation object
+        reg.registerStudent(student);//registration prosses 
+        result.calculateStudent_Result(student);//caculation result 
+
+
+
+
+         // Display the result
+         System.out.println("Student Result: " + reg.toString());
+         System.out.println("Student Result: " + result.toString());
+     }
+
+}
