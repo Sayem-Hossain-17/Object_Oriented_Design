@@ -1,0 +1,137 @@
+//1st file
+package Interface_Segregation_principal;
+/**
+ * Interface representing a generic teacher.
+ */
+public interface Teacher {
+
+    /**
+     * Method for teaching.
+     */
+    void teach();
+}
+
+//2nd file
+package Interface_Segregation_principal;
+
+/**
+ * this Represents a teacher who teaches courses related to Computer Science and Engineering (CSE).
+ */
+public interface CSE_Teacher extends Teacher {
+
+    /**
+     * Teaches subjects specifically related to Computer Science and Engineering.
+    */
+    void teaching_CSE();
+}
+
+//3nd file
+package Interface_Segregation_principal;
+/**
+ * Implementation of a teacher who teaches Computer Science and Engineering (CSE) subjects.
+ */
+public class CSE_TeacherImpl implements CSE_Teacher {
+
+    @Override//method
+    public void teach() {
+        System.out.println("Start teaching to CSE students.");
+    }
+
+    @Override//method
+    public void teaching_CSE() {
+        System.out.println("Teaching specialized CSE topics.");
+    }
+}
+
+//4rd file
+package Interface_Segregation_principal;
+
+/**
+ * this  Represents a teacher who teaches courses related to Electronics and Communication Engineering (ECE).
+ */
+public interface ECE_Teacher extends Teacher {
+
+    /**
+     * Teaches subjects specifically related to Electronics and Communication Engineering.
+     */
+    void teaching_ECE();
+}
+
+//5th file
+package Interface_Segregation_principal;
+
+/**
+ * Implementation of a teacher who teaches Electronics and Communication Engineering (ECE) subjects.
+ */
+public class ECE_TeacherImpl implements ECE_Teacher {
+
+    //@Override teach_method
+    public void teach() {
+        System.out.println("Start teaching to ECE students.");
+    }
+
+    //@Override teaching_ECE_method
+    public void teaching_ECE() {
+        System.out.println("Teaching specialized ECE topics.");
+    }
+}
+//6th file
+package Interface_Segregation_principal;
+
+/**
+ * Interface representing a teacher who teaches Urban and Regional Planning (URP).
+ */
+public interface URP_Teacher extends Teacher {
+
+    /**
+     * Teaches subjects specifically related to Urban and Regional Planning.
+     */
+    void teaching_URP();
+}
+//7th file
+package Interface_Segregation_principal;
+
+/**
+ * Implementation of a teacher who teaches Urban and Regional Planning (URP) subjects.
+ */
+public class URP_TeacherImpl implements URP_Teacher {
+
+    //@Override method
+    public void teach() {
+        System.out.println("Start teaching to URP students.");
+    }
+
+   // @Override method
+    public void teaching_URP() {
+        System.out.println("Teaching specialized URP topics.");
+    }
+}
+
+//8th file ( main file)
+package Interface_Segregation_principal;
+
+/**
+ * Class for selecting and testing different types of teachers.
+ */
+public class Teacher_selection {
+    
+    /**
+     * Main method to run the teacher selection program.
+     */
+    public static void main(String[] args) {
+        ECE_Teacher eceTeacher = new ECE_TeacherImpl(); // Create ECE teacher object
+        eceTeacher.teach(); // Access teach method
+        eceTeacher.teaching_ECE(); // Access ECE subject teaching
+
+        
+         CSE_Teacher cseTeacher = new CSE_TeacherImpl(); // Create CSE teacher object
+         cseTeacher.teach();
+         cseTeacher.teaching_CSE(); // Access CSE subject teaching
+
+    
+         URP_Teacher urpTeacher = new URP_TeacherImpl(); // Create URP teacher object
+         urpTeacher.teach();
+         urpTeacher.teaching_URP(); // Access URP subject teaching
+    }
+}
+
