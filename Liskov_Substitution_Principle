@@ -1,0 +1,123 @@
+//1st file
+package Liskov_Substitution_Principle;
+/*
+ * Innerengineeing student
+ */
+
+public class Engineering_Perpose {
+    //black method
+    public void cse(){
+
+    }
+    //black method
+    public void mathamaties(){
+
+    }
+
+}
+//2nd file
+package Interface_Segregation_principal;
+
+/**
+ * Implementation of a teacher who teaches Computer Science and Engineering (CSE) subjects.
+ */
+public class CSE_TeacherImpl implements CSE_Teacher {
+
+    @Override//method
+    public void teach() {
+        System.out.println("Start teaching to CSE students.");
+    }
+
+    @Override//method
+    public void teaching_CSE() {
+        System.out.println("Teaching specialized CSE topics.");
+    }
+}
+// 3rd file class
+package Liskov_Substitution_Principle;
+
+/**
+ * InnerMedical_Student
+ */
+public class Medical_Perpose{
+
+   public void HumanBody() {
+
+   }
+   public void blood_Ciculation(){
+
+   }
+
+}
+// 4th file 
+package Liskov_Substitution_Principle;
+/*
+ * implement all the methods of Medical_purpose class
+ */
+
+public class MedicalStudent extends Medical_Perpose{
+
+  public void HumanBody(){
+    System.out.println("Study on (Eye,Nose,Year,arms,legs,heart etc).");
+  }
+   public void blood_Ciculation(){
+    System.out.println("Study on(how to blood ciculated in body,palse rate etc).");
+   }
+
+}
+
+//5th file 
+package Liskov_Substitution_Principle;
+/*
+ * Innergenral student
+ */
+public class Genaral_Perpose {
+
+    public void english(){
+
+    }
+    public void Gk(){
+        
+    }
+}
+//6th file
+package Liskov_Substitution_Principle;
+/*
+ * implement all the methods of Genaral_purpose class
+ */
+public class GenaralStudent extends Genaral_Perpose{
+    public void english(){
+        System.out.println("Study on(English Literature,Grammar etc).");
+    }
+    public void Gk(){
+        System.out.println("Study on(Histry of independent bangladesh,Sports,Global Map etc).");
+    }
+
+}
+//7th file (main class)
+package Liskov_Substitution_Principle;
+
+/*
+ * implement Students Studying perpose
+ */
+
+public class Student {
+
+    public static void main(String[] args) {
+        GenaralStudent s=new GenaralStudent();
+        System.err.println("For Genaral Student:");
+        s.english();
+        s.Gk();
+        System.err.println("\nFor Engineering Student:");
+        EngineeringStudent s1=new EngineeringStudent();
+        s1.cse();
+        s1.mathamaties();
+        System.err.println("\nFor Medical Student:");
+        MedicalStudent s2=new MedicalStudent();
+        s2.HumanBody();
+        s2.blood_Ciculation();
+
+    }
+
+}
+
